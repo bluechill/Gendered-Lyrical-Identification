@@ -1,0 +1,9 @@
+# this should be scons
+# you should google it
+
+
+default: nltk
+
+nltk:
+	python nltk_classifier.py
+
