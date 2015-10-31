@@ -1,5 +1,8 @@
 [Song #]
-[Artist #]|[Genre #]|[Lat/Long Zone #]
+[Artist #]
+[Genre #]
+[Lat/Long Zone #]
+
 [Word1]
 [Word2]
 ...
