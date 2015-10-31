@@ -1,0 +1,6 @@
+[Song #]
+[Artist #]|[Genre #]|[Lat/Long Zone #]
+[Word1]
+[Word2]
+...
+[WordN]
