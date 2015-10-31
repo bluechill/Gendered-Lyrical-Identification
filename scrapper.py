@@ -45,7 +45,11 @@ class MyHTMLParser(HTMLParser):
 			for x in range(0,len(result)):
 				self.lyrics.append(result[x])
 
-page = urllib.urlopen("http://www.azlyrics.com/lyrics/maroon5/shewillbeloved.html")
+if len(sys.argv) < 2:
+	print 'Usage: ', sys.argv[0], ' [file url]'
+	exit(1)
+
+page = urllib.urlopen(sys.argv[1])
 parser = MyHTMLParser()
 parser.feed(page.read())
 
