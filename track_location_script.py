@@ -105,7 +105,7 @@ def generateTrackLocationFile(inputFileName, outputFileName):
    # At the end, write the results to disk
    clean_result_file = open(outputFileName, 'w')
    for entry in track_locations_list:
-      clean_result_file.write(entry[0] + ',' + str(entry[1]) + '\n')
+      clean_result_file.write(entry[0] + ' ' + str(entry[1]) + '\n')
 
    clean_result_file.close();
 
