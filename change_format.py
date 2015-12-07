@@ -30,6 +30,7 @@ trackid_to_genre.close()
 total_count = 0
 document = []
 words = []
+count_1 = 0
 
 for line in revised_file.readlines():
 	if line[0] == '#':
@@ -43,10 +44,17 @@ for line in revised_file.readlines():
 	comma_index2 = line.index(',',comma_index1+1)
 
 	track_id = line[0:comma_index1]
+	
 	try:
 		genre_id = trackid_to_genre_map[track_id]
+		if genre_id == 1:
+			if count_1 > 5000:
+				continue
+			else:
+				count_1 +=1
 	except KeyError:
 		continue
+
 	genre = str(genre_id)+' '
 	word_frequency = line[comma_index2+1:]
 	context = re.sub('(\:)|(\,)',' ',word_frequency)
