@@ -1,0 +1,65 @@
+import sys,os 
+import re 
+
+
+revised_file = open('revised_dataset_test.txt','r')
+output_file = open('reviesd_dataset_test_4Genres.txt','w')
+trackid_to_genre = open('trackid_to_genre.txt','r')
+
+trackid_to_genre_map = {}
+
+for line in trackid_to_genre.readlines():
+	line = line.split()
+	if line[1] == 'Pop_Rock':
+		trackid_to_genre_map[line[0]] = 1
+		continue
+	if line[1] == 'Electronic':
+		trackid_to_genre_map[line[0]] = 2
+		continue
+	if line[1] == 'Rap':
+		trackid_to_genre_map[line[0]] = 3
+		continue
+	if line[1] == 'Country':
+		trackid_to_genre_map[line[0]] = 4
+		continue
+	if line[1] == 'Latin':
+		trackid_to_genre_map[line[0]] = 5
+	continue
+trackid_to_genre.close()
+
+total_count = 0
+document = []
+words = []
+
+for line in revised_file.readlines():
+	if line[0] == '#':
+		continue
+	if line[0] == '%':
+		word_line = line[1:]
+		total_count = len(word_line.split(','))
+		words = ' '.join(word_line.split(','))
+		continue
+	comma_index1 = line.index(',',0)
+	comma_index2 = line.index(',',comma_index1+1)
+
+	track_id = line[0:comma_index1]
+	try:
+		genre_id = trackid_to_genre_map[track_id]
+	except KeyError:
+		continue
+	genre = str(genre_id)+' '
+	word_frequency = line[comma_index2+1:]
+	context = re.sub('(\:)|(\,)',' ',word_frequency)
+	new_line = genre + context
+	document.append(new_line)
+
+revised_file.close()
+output_file.write('DOC_WORD_MATRIX_TRAIN'+'\n')
+total_entry = len(document)
+output_file.write(str(total_entry)+' '+str(total_count)+'\n')
+output_file.write(words)
+
+
+for line in document:
+	output_file.write(line)
+output_file.close()
