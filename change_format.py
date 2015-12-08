@@ -48,7 +48,7 @@ for line in revised_file.readlines():
 	try:
 		genre_id = trackid_to_genre_map[track_id]
 		if genre_id == 1:
-			if count_1 > 5000:
+			if count_1 > 1000:
 				continue
 			else:
 				count_1 +=1
