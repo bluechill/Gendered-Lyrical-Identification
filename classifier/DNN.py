@@ -19,7 +19,7 @@ def getData(filename, vocab, intEntry= False):
 			labels.append([0, 1, 0, 0])
 		elif song[0] == '3':
 			labels.append([0, 0, 1, 0])
-		elif song[0] == '5':
+		elif song[0] == '4':
 			labels.append([0, 0, 0, 1])
 		words = song[1: : 2]
 		times = song[2: : 2]
@@ -58,21 +58,23 @@ def main():
 	test_matrix = np.concatenate((test_matrix.toarray(), np.ones([test_matrix.shape[0], 1])), axis = 1)
 	#build up DNN
 	model = Sequential()
-	model.add((Dense(1000, input_dim = train_matrix.shape[1], init = 'lecun_uniform', W_regularizer = l2(0.0005))))
-	model.add(Activation('tanh'))
+	model.add((Dense(1000, input_dim = train_matrix.shape[1], init = 'lecun_uniform', W_regularizer = l2(0.0005),b_regularizer = l2(0.0005))))
+	model.add(Activation('linear'))
+	model.add(Dropout(0.25))
 	model.add(Dense(200, init = 'lecun_uniform', W_regularizer = l2(0.0005)))
 	model.add(Activation('tanh'))
+	model.add(Dropout(0.25))
 	model.add(Dense(4, init = 'lecun_uniform', W_regularizer = l2(0.0005)))
 	model.add(Activation('softmax'))
 
 	sgd = SGD(lr = 0.01, decay = 1e-6)
 	model.compile(loss = 'mean_squared_error', optimizer = sgd)
 
-	model.fit(train_matrix, train_labels, nb_epoch = 10, batch_size = 1)
-	score = model.evaluate(test_matrix, test_labels, batch_size = 1, show_accuracy = True)
+	model.fit(train_matrix, train_labels, nb_epoch = 10, batch_size = 25)
+	score = model.evaluate(test_matrix, test_labels, batch_size = 25, show_accuracy = True)
 	print 'testing error: ',
 	print score
-	score = model.evaluate(train_matrix, train_labels, batch_size = 1, show_accuracy = True)
+	score = model.evaluate(train_matrix, train_labels, batch_size = 25, show_accuracy = True)
 	print 'trainning error:'
 	print score
 	return
