@@ -3,7 +3,7 @@ import re
 
 
 revised_file = open('revised_dataset_test.txt','r')
-output_file = open('reviesd_dataset_test_4Genres.txt','w')
+output_file = open('revised_dataset_test_7Genres.txt','w')
 trackid_to_genre = open('trackid_to_genre.txt','r')
 
 trackid_to_genre_map = {}
@@ -24,6 +24,16 @@ for line in trackid_to_genre.readlines():
 		continue
 	if line[1] == 'Latin':
 		trackid_to_genre_map[line[0]] = 5
+		continue
+	if line[1] == 'RnB':
+		trackid_to_genre_map[line[0]] = 6
+		continue
+	if line[1] == 'Jazz':
+		trackid_to_genre_map[line[0]] = 7
+		continue
+	if line[1] == 'International':
+		trackid_to_genre_map[line[0]] = 8
+		continue
 	continue
 trackid_to_genre.close()
 
@@ -48,7 +58,7 @@ for line in revised_file.readlines():
 	try:
 		genre_id = trackid_to_genre_map[track_id]
 		if genre_id == 1:
-			if count_1 > 5000:
+			if count_1 > 800:
 				continue
 			else:
 				count_1 +=1
