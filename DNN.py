@@ -87,7 +87,7 @@ def main():
 	sgd = SGD(lr = 0.01, decay = 1e-6)
 	model.compile(loss = 'mean_squared_error', optimizer = sgd)
 
-	model.fit(train_matrix, train_labels, nb_epoch = 25, batch_size = 200, verbose=2)
+	model.fit(train_matrix, train_labels, nb_epoch = 25, batch_size = 100, verbose=2)
 	score = model.evaluate(test_matrix, test_labels, batch_size = 25, show_accuracy = True, verbose=0)
 	print 'testing error: ',
 	print score
