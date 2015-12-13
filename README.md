@@ -1,2 +1,1 @@
-# Gendered-Lyrical-Identification
-Gendered Lyrical Identification
+# Music Lyrics Classification & Generation
