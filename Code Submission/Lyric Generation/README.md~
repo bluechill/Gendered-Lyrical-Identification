@@ -1,0 +1,5 @@
+how to run:
+
+1. type into terminal: virtualenv venv --distribute
+2. type into terminal: source venv/bin/activate
+3. type into terminal: pip install -r requirements.txt
